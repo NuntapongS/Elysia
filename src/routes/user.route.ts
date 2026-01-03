@@ -4,8 +4,13 @@ import { userService } from "../services/user.service";
 export const userRoute = new Elysia({ prefix: "/user" })
   .post(
     "/",
-    async ({ body }) => {
-      return userService.create(body);
+    async ({ body, set }) => {
+      try {
+        return userService.create(body);
+      } catch (err) {
+        set.status = 500;
+        return { error: "Failed to create user" };
+      }
     },
     {
       body: t.Object({
