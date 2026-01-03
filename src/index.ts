@@ -3,8 +3,9 @@ import { userRoute } from "./routes/user.route";
 import { config } from "./config";
 
 const app = new Elysia()
-  .use(userRoute)
-  .group("/api/v1", (app) => app.get("/health", () => ({ status: "ok" })))
+  .group("/api/v1", (app) =>
+    app.get("/health", () => ({ status: "ok" })).use(userRoute)
+  )
   .listen(config.server.port);
 
 console.log(
