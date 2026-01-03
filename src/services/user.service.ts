@@ -7,4 +7,8 @@ export const userService = {
     const [newUser] = await db.insert(users).values(data).returning();
     return newUser;
   },
+
+  async getAll(): Promise<User[]> {
+    return db.select().from(users);
+  },
 };
