@@ -1,7 +1,7 @@
 import { Elysia } from "elysia";
 
 const app = new Elysia()
-  .group("/api/v1", (app) => app.get("/hello", () => "Hello from API v1"))
+  .group("/api/v1", (app) => app.get("/health", () => ({ status: "ok" })))
   .listen(3000);
 
 console.log(
