@@ -10,4 +10,8 @@ export type CreateUserInput = {
   email: string;
 };
 
+export type UserOutput = {
+  id: string;
+};
+
 export type UpdateUserInput = Partial<CreateUserInput>;
