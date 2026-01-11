@@ -1,16 +1,13 @@
 import { Elysia, t } from "elysia";
-import { userService } from "../services/user.service";
+import { userHandler } from "../handlers/user.handler";
 
 export const userRoute = new Elysia({ prefix: "/user" })
   .post(
     "/",
     async ({ body, set }) => {
-      try {
-        return userService.create(body);
-      } catch (err) {
-        set.status = 500;
-        return { error: "Failed to create user" };
-      }
+      return await userHandler.create(body, (status) => {
+        set.status = status;
+      });
     },
     {
       body: t.Object({
@@ -20,13 +17,11 @@ export const userRoute = new Elysia({ prefix: "/user" })
     }
   )
   .get("/", async () => {
-    return userService.getAll();
+    return await userHandler.getAll();
   })
 
-  .get("/:id", async ({ params }) => {
-    const user = await userService.getUserById(params.id);
-    if (!user) {
-      return { error: "User not found" };
-    }
-    return user;
+  .get("/:id", async ({ params, set }) => {
+    return await userHandler.getUserById(params.id, (status) => {
+      set.status = status;
+    });
   });
