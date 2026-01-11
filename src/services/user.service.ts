@@ -1,20 +1,17 @@
-import { db } from "../database";
-import { users } from "../database/schema";
-import { eq } from "drizzle-orm";
+import { userRepository } from "../repositories/user.repository";
 import type { CreateUserInput, UserOutput, User } from "../types";
 
 export const userService = {
   async create(data: CreateUserInput): Promise<UserOutput> {
-    const [newUser] = await db.insert(users).values(data).returning();
+    const newUser = await userRepository.create(data);
     return { id: newUser.id };
   },
 
   async getAll(): Promise<User[]> {
-    return db.select().from(users);
+    return userRepository.getAll();
   },
 
   async getUserById(id: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user;
+    return userRepository.getUserById(id);
   },
 };
