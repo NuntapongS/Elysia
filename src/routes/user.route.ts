@@ -4,10 +4,8 @@ import { userHandler } from "../handlers/user.handler";
 export const userRoute = new Elysia({ prefix: "/user" })
   .post(
     "/",
-    async ({ body, set }) => {
-      return await userHandler.create(body, (status) => {
-        set.status = status;
-      });
+    async ({ body }) => {
+      return await userHandler.create(body);
     },
     {
       body: t.Object({
@@ -20,8 +18,6 @@ export const userRoute = new Elysia({ prefix: "/user" })
     return await userHandler.getAll();
   })
 
-  .get("/:id", async ({ params, set }) => {
-    return await userHandler.getUserById(params.id, (status) => {
-      set.status = status;
-    });
+  .get("/:id", async ({ params }) => {
+    return await userHandler.getUserById(params.id);
   });
