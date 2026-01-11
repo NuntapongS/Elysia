@@ -21,4 +21,12 @@ export const userRoute = new Elysia({ prefix: "/user" })
   )
   .get("/", async () => {
     return userService.getAll();
+  })
+
+  .get("/:id", async ({ params }) => {
+    const user = await userService.getUserById(params.id);
+    if (!user) {
+      return { error: "User not found" };
+    }
+    return user;
   });
