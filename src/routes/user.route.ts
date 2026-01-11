@@ -19,5 +19,5 @@ export const userRoute = new Elysia({ prefix: "/user" })
   })
 
   .get("/:id", async ({ params }) => {
-    return await userHandler.getUserById(params.id);
+    return await userHandler.getById(params.id);
   });

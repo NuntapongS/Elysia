@@ -20,9 +20,9 @@ export const userHandler = {
     }
   },
 
-  async getUserById(id: string) {
+  async getById(id: string) {
     try {
-      const user = await userService.getUserById(id);
+      const user = await userService.getById(id);
       if (!user) {
         return { error: "User not found" };
       }

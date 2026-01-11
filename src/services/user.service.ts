@@ -11,7 +11,7 @@ export const userService = {
     return userRepository.getAll();
   },
 
-  async getUserById(id: string): Promise<User | undefined> {
-    return userRepository.getUserById(id);
+  async getById(id: string): Promise<User | undefined> {
+    return userRepository.getById(id);
   },
 };
