@@ -40,4 +40,13 @@ export const userHandler = {
       return { error: "Failed to update user" };
     }
   },
+
+  async delete(id: string) {
+    try {
+      const result = await userService.delete(id);
+      return result;
+    } catch (err) {
+      return { error: "Failed to delete user" };
+    }
+  },
 };

@@ -23,4 +23,13 @@ export const userService = {
     if (!updatedUser) return undefined;
     return { id: updatedUser.id };
   },
+
+  async delete(id: string): Promise<{ success: boolean }> {
+    const deletedUser = await userRepository.getById(id);
+    if (!deletedUser) {
+      return { success: false };
+    }
+    await userRepository.delete(id);
+    return { success: true };
+  },
 };

@@ -31,4 +31,7 @@ export const userRoute = new Elysia({ prefix: "/user" })
         email: t.Optional(t.String({ format: "email" })),
       }),
     }
-  );
+  )
+  .delete("/:id", async ({ params }) => {
+    return await userHandler.delete(params.id);
+  });

@@ -29,4 +29,12 @@ export const userRepository = {
       .returning();
     return updatedUser;
   },
+
+  async delete(id: string): Promise<User | undefined> {
+    const [deletedUser] = await db
+      .delete(users)
+      .where(eq(users.id, id))
+      .returning();
+    return deletedUser;
+  },
 };
