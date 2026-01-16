@@ -17,4 +17,16 @@ export const userRepository = {
     const [user] = await db.select().from(users).where(eq(users.id, id));
     return user;
   },
+
+  async update(
+    id: string,
+    data: Partial<CreateUserInput>
+  ): Promise<User | undefined> {
+    const [updatedUser] = await db
+      .update(users)
+      .set(data)
+      .where(eq(users.id, id))
+      .returning();
+    return updatedUser;
+  },
 };

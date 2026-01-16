@@ -31,4 +31,13 @@ export const userHandler = {
       return { error: "Failed to fetch user" };
     }
   },
+
+  async update(id: string, body: Partial<CreateUserInput>) {
+    try {
+      const result = await userService.update(id, body);
+      return result;
+    } catch (err) {
+      return { error: "Failed to update user" };
+    }
+  },
 };
