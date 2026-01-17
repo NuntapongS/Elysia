@@ -24,12 +24,12 @@ export const userService = {
     return { id: updatedUser.id };
   },
 
-  async delete(id: string): Promise<{ success: boolean }> {
+  async delete(id: string): Promise<{ status: string }> {
     const deletedUser = await userRepository.getById(id);
     if (!deletedUser) {
-      return { success: false };
+      return { status: "not found user" };
     }
     await userRepository.delete(id);
-    return { success: true };
+    return { status: "ok" };
   },
 };
